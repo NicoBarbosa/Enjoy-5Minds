@@ -15,7 +15,7 @@
 		  <artifactId>jdbc-driver</artifactId>
 		  <version>12</version>
 		  <scope>system</scope>
-		  <systemPath>/Users/nicopenante/Documents/FIAP/Things of Java/ojdbc8.jar</systemPath>
+		  <systemPath>C:\Users\Amanda\Downloads\ojdbc8.jar</systemPath>
 		</dependency>
 	  </dependencies>
 </project>

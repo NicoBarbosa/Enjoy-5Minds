@@ -1,12 +1,17 @@
 package br.com.fiap.enjoy.domain;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -16,7 +21,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="tb_produto")
+@Table(name="tb_enjoy_produto")
 public class Produto {
 	
 	@Id
@@ -40,28 +45,32 @@ public class Produto {
 	@UpdateTimestamp
 	private Calendar atualizacao;
 	
-//	@OneToMany(mappedBy = "estabVisita")
-//	private List<Visitas> visitas;
+	@OneToMany(mappedBy = "produto")
+	private List<Visitas> visitas;
 
-//  @ManyToOne
-//	@JoinColumn(name="id_bebida")
-//  private Bebida bebida;
+	@OneToOne
+	@JoinColumn(name="id_bebida")
+  	private Bebida bebida;
 
-//  @ManyToOne
-//  @JoinColumn(name="id_estab")
-//  private Estabelecimento estabelecimento;
+	@ManyToOne
+	@JoinColumn(name="id_estab")
+	private Estabelecimento estabelecimento;
 
 	public Produto() {
 		super();
 	}
 
-	public Produto(int id, int quantidade, double valor, Calendar dataCadastro, Calendar atualizacao) {
+	public Produto(int id, int quantidade, double valor, Calendar dataCadastro, Calendar atualizacao,
+			List<Visitas> visitas, Bebida bebida, Estabelecimento estabelecimento) {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
 		this.valor = valor;
 		this.dataCadastro = dataCadastro;
 		this.atualizacao = atualizacao;
+		this.visitas = visitas;
+		this.bebida = bebida;
+		this.estabelecimento = estabelecimento;
 	}
 
 	public int getId() {
@@ -103,7 +112,29 @@ public class Produto {
 	public void setAtualizacao(Calendar atualizacao) {
 		this.atualizacao = atualizacao;
 	}
-	
-	
 
+	public List<Visitas> getVisitas() {
+		return visitas;
+	}
+
+	public void setVisitas(List<Visitas> visitas) {
+		this.visitas = visitas;
+	}
+
+	public Estabelecimento getEstabelecimento() {
+		return estabelecimento;
+	}
+
+	public void setEstabelecimento(Estabelecimento estabelecimento) {
+		this.estabelecimento = estabelecimento;
+	}
+
+	public Bebida getBebida() {
+		return bebida;
+	}
+
+	public void setBebida(Bebida bebida) {
+		this.bebida = bebida;
+	}
+	
 }

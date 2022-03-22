@@ -1,19 +1,19 @@
 package br.com.fiap.enjoy.domain;
 
 import java.util.Calendar;
-//import java.util.List;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.OneToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_consumidor")
+@Table(name="tb_enjoy_consumidor")
 public class Consumidor {
 	
 	@Id
@@ -40,15 +40,16 @@ public class Consumidor {
 	@Column(name="dt_nascimento")
 	private Calendar nascimento;
 	
-//	@OneToMany(mappedBy = "estabVisita")
-//	private List<Visitas> visitas;
+	@OneToMany(mappedBy = "consumidor")
+	private List<Visitas> visitas;
 	
 
 	public Consumidor() {
 		super();
 	}
 
-	public Consumidor(int id, int telefone, String nome, String email, String cpf, String genero, Calendar nascimento) {
+	public Consumidor(int id, int telefone, String nome, String email, String cpf, String genero, Calendar nascimento,
+			List<Visitas> visitas) {
 		super();
 		this.id = id;
 		this.telefone = telefone;
@@ -57,6 +58,7 @@ public class Consumidor {
 		this.cpf = cpf;
 		this.genero = genero;
 		this.nascimento = nascimento;
+		this.visitas = visitas;
 	}
 
 	public int getId() {
@@ -114,7 +116,13 @@ public class Consumidor {
 	public void setNascimento(Calendar nascimento) {
 		this.nascimento = nascimento;
 	}
-	
-	
+
+	public List<Visitas> getVisitas() {
+		return visitas;
+	}
+
+	public void setVisitas(List<Visitas> visitas) {
+		this.visitas = visitas;
+	}
 
 }

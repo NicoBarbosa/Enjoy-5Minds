@@ -4,7 +4,8 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>br.com.fiap.enjoy.domain.Estabelecimento</class>
 		<class>br.com.fiap.enjoy.domain.Consumidor</class>
-		
+		<class>br.com.fiap.enjoy.domain.Visitas</class>
+		<class>br.com.fiap.enjoy.domain.Bebida</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.hbm2ddl.auto" value="create"/>

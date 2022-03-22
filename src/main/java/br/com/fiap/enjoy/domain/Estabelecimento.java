@@ -3,12 +3,14 @@ package br.com.fiap.enjoy.domain;
 
 import java.util.Calendar;
 //import java.util.List;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 //import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -18,7 +20,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name = "tb_estabelecimento")
+@Table(name = "tb_enjoy_estabelecimento")
 public class Estabelecimento {
 	@Id
 	@SequenceGenerator(name="estabelecimento",sequenceName="sq_fm_estab",allocationSize=1)
@@ -49,18 +51,19 @@ public class Estabelecimento {
     @Column(name = "dt_cadastro", nullable = false)
     private Calendar dataCadastro;
 	
-//	@OneToMany(mappedBy = "estabVisita")
-//	private List<Visitas> visitas;
-//	
-//	@OneToMany(mappedBy = "estabProduto")
-//	private List<Produto> produto;
+	@OneToMany(mappedBy = "estabelecimento")
+	private List<Visitas> visitas;
+	
+	@OneToMany(mappedBy = "estabelecimento")
+	private List<Produto> produto;
 
 	public Estabelecimento() {
 		super();
 	}
 
 	public Estabelecimento(Integer idEstab, String nomeEstabelecimento, String categoria, String numeroCep,
-			String nomeEnd, String numeroEndereco, String complemento, Calendar dataCadastro) {
+			String nomeEnd, String numeroEndereco, String complemento, Calendar dataCadastro, List<Visitas> visitas,
+			List<Produto> produto) {
 		super();
 		this.idEstab = idEstab;
 		this.nomeEstabelecimento = nomeEstabelecimento;
@@ -70,6 +73,8 @@ public class Estabelecimento {
 		this.numeroEndereco = numeroEndereco;
 		this.complemento = complemento;
 		this.dataCadastro = dataCadastro;
+		this.visitas = visitas;
+		this.produto = produto;
 	}
 
 	public Integer getIdEstab() {
@@ -136,21 +141,21 @@ public class Estabelecimento {
 		this.dataCadastro = dataCadastro;
 	}
 
-//	public List<Visitas> getVisitas() {
-//		return visitas;
-//	}
-//
-//	public void setVisitas(List<Visitas> visitas) {
-//		this.visitas = visitas;
-//	}
-//
-//	public List<Produto> getProduto() {
-//		return produto;
-//	}
-//
-//	public void setProduto(List<Produto> produto) {
-//		this.produto = produto;
-//	}
+	public List<Visitas> getVisitas() {
+		return visitas;
+	}
+
+	public void setVisitas(List<Visitas> visitas) {
+		this.visitas = visitas;
+	}
+
+	public List<Produto> getProduto() {
+		return produto;
+	}
+
+	public void setProduto(List<Produto> produto) {
+		this.produto = produto;
+	}
 	
 	
 }

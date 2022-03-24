@@ -48,6 +48,7 @@ public class Produto {
 	@OneToMany(mappedBy = "produto")
 	private List<Visitas> visitas;
 
+	//OneToMany
 	@OneToOne
 	@JoinColumn(name="id_bebida")
   	private Bebida bebida;

@@ -37,10 +37,12 @@ public class Visitas {
 	@Column(name = "dt_visita", nullable = false)
 	private Calendar dataVisita;
 	
+	//ManyToOne
 	@OneToOne
 	@JoinColumn(name = "id_consumidor")
 	private Consumidor consumidor;
 	
+	//ManyToOne
 	@OneToOne
 	@JoinColumn(name = "id_estabelecimento")
 	private Estabelecimento estabelecimento;

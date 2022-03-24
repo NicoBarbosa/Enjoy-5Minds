@@ -23,6 +23,8 @@ public class Bebida {
 	
 	@Column(name = "ds_categoria", length = 30, nullable = false)
 	private String categoria;
+	
+	//ManyToOne for Produto
 
 	public Bebida() {
 		super();

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -37,22 +38,21 @@ public class Visitas {
 	@Column(name = "dt_visita", nullable = false)
 	private Calendar dataVisita;
 	
-	//ManyToOne
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "id_consumidor")
 	private Consumidor consumidor;
 	
-	//ManyToOne
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "id_estabelecimento")
 	private Estabelecimento estabelecimento;
 	
 	@OneToOne
-	@JoinColumn(name = "id_produto")
-	private Produto produto;
+	@JoinColumn(name = "id_comanda")
+	private Comanda comanda;
+
 
 	public Visitas(Integer id, double valorConsumido, int quantidade, Calendar dataVisita, Consumidor consumidor,
-			Estabelecimento estabelecimento, Produto produto) {
+			Estabelecimento estabelecimento, Comanda comanda) {
 		super();
 		this.id = id;
 		this.valorConsumido = valorConsumido;
@@ -60,7 +60,7 @@ public class Visitas {
 		this.dataVisita = dataVisita;
 		this.consumidor = consumidor;
 		this.estabelecimento = estabelecimento;
-		this.produto = produto;
+		this.comanda = comanda;
 	}
 
 	public Visitas() {
@@ -115,12 +115,12 @@ public class Visitas {
 		this.estabelecimento = estabelecimento;
 	}
 
-	public Produto getProduto() {
-		return produto;
+	public Comanda getComanda() {
+		return comanda;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setComanda(Comanda comanda) {
+		this.comanda = comanda;
 	}
 	
 }

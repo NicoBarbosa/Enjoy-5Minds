@@ -22,7 +22,7 @@ public class Consumidor {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="consumidor")
 	private int id;
 	
-	@Column(name="nr_telefone",nullable=false,length=11)
+	@Column(name="nr_telefone",nullable=false,length=11, unique = true)
 	private int telefone;
 	
 	@Column(name="nm_consumidor",nullable=false,length=50)

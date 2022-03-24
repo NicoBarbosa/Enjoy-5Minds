@@ -55,7 +55,7 @@ public class Estabelecimento {
 	private List<Visitas> visitas;
 	
 	@OneToMany(mappedBy = "estabelecimento")
-	private List<Produto> produto;
+	private List<Comanda> comanda;
 
 	public Estabelecimento() {
 		super();
@@ -63,7 +63,7 @@ public class Estabelecimento {
 
 	public Estabelecimento(Integer idEstab, String nomeEstabelecimento, String categoria, String numeroCep,
 			String nomeEnd, String numeroEndereco, String complemento, Calendar dataCadastro, List<Visitas> visitas,
-			List<Produto> produto) {
+			List<Comanda> comanda) {
 		super();
 		this.idEstab = idEstab;
 		this.nomeEstabelecimento = nomeEstabelecimento;
@@ -74,7 +74,7 @@ public class Estabelecimento {
 		this.complemento = complemento;
 		this.dataCadastro = dataCadastro;
 		this.visitas = visitas;
-		this.produto = produto;
+		this.comanda = comanda;
 	}
 
 	public Integer getIdEstab() {
@@ -149,13 +149,12 @@ public class Estabelecimento {
 		this.visitas = visitas;
 	}
 
-	public List<Produto> getProduto() {
-		return produto;
+	public List<Comanda> getComanda() {
+		return comanda;
 	}
 
-	public void setProduto(List<Produto> produto) {
-		this.produto = produto;
+	public void setComanda(List<Comanda> comanda) {
+		this.comanda = comanda;
 	}
-	
 	
 }

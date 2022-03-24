@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,19 +20,19 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="tb_enjoy_produto")
-public class Produto {
+@Table(name="tb_enjoy_comanda")
+public class Comanda {
 	
 	@Id
-	@Column(name="id_produto")
-	@SequenceGenerator(name="produto",sequenceName="sq_tb_produto",allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="produto")
+	@Column(name="id_comanda")
+	@SequenceGenerator(name="comanda",sequenceName="sq_tb_comanda",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="comanda")
 	private int id;
 	
-	@Column(name="qt_produto")
+	@Column(name="qt_produtos")
 	private int quantidade;
 	
-	@Column(name="vl_produto")
+	@Column(name="vl_comanda")
 	private double valor;
 	
 	@CreationTimestamp
@@ -45,24 +44,25 @@ public class Produto {
 	@UpdateTimestamp
 	private Calendar atualizacao;
 	
-	@OneToMany(mappedBy = "produto")
+	@OneToMany(mappedBy = "comanda")
 	private List<Visitas> visitas;
 
 	//OneToMany
-	@OneToOne
-	@JoinColumn(name="id_bebida")
-  	private Bebida bebida;
+	@OneToMany(mappedBy = "comanda")
+  	private List<Bebida> bebida;
 
 	@ManyToOne
 	@JoinColumn(name="id_estab")
 	private Estabelecimento estabelecimento;
 
-	public Produto() {
+	public Comanda() {
 		super();
 	}
 
-	public Produto(int id, int quantidade, double valor, Calendar dataCadastro, Calendar atualizacao,
-			List<Visitas> visitas, Bebida bebida, Estabelecimento estabelecimento) {
+	
+
+	public Comanda(int id, int quantidade, double valor, Calendar dataCadastro, Calendar atualizacao,
+			List<Visitas> visitas, List<Bebida> bebida, Estabelecimento estabelecimento) {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
@@ -73,6 +73,8 @@ public class Produto {
 		this.bebida = bebida;
 		this.estabelecimento = estabelecimento;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -130,11 +132,15 @@ public class Produto {
 		this.estabelecimento = estabelecimento;
 	}
 
-	public Bebida getBebida() {
+
+
+	public List<Bebida> getBebida() {
 		return bebida;
 	}
 
-	public void setBebida(Bebida bebida) {
+
+
+	public void setBebida(List<Bebida> bebida) {
 		this.bebida = bebida;
 	}
 	

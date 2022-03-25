@@ -1,6 +1,6 @@
 package br.com.fiap.enjoy.dao;
 
-import javax.management.Query;
+import javax.persistence.Query;
 import javax.persistence.EntityManager;
 
 public class ConsultasDAO {
@@ -23,9 +23,24 @@ public class ConsultasDAO {
 		
 	}
 	
-	private void getBebidaConsumida() {
+	private void getBebidaConsumida(int numTelefone) {
 		
+		Query query = (Query) em.createQuery("SELECT BEB.categoria AS categoria_bebida, SUM(COM.quantidade) AS quantidade_prod"
+				+ "FROM Bebida BEB"
+				+ "INNER JOIN Comanda COM"
+				+ "ON BEB.id = COM.bebida"
+				+ "INNER JOIN Visitas VIS"
+				+ "ON COM.id = VIS.comanda"
+				+ "INNER JOIN Consumidor CON"
+				+ "ON VIS.consumidor = CON.id"
+				+ "WHERE CON.telefone = :tel"
+				+ "GROUP BY COM.quantidade,BEB.categoria"
+				+ "ORDER BY BEB.categoria");
+		query.setMaxResults(1);
+		query.setParameter("tel", numTelefone);
 		
+		var resultado1 = (Object[]) query.getSingleResult();		
+		System.out.println(resultado1);
 	}
 	
 

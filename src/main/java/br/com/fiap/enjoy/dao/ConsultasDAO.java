@@ -23,5 +23,10 @@ public class ConsultasDAO {
 		
 	}
 	
+	private void getBebidaConsumida() {
+		
+		
+	}
+	
 
 }

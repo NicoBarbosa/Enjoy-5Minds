@@ -8,4 +8,10 @@ public class ConsultasDAO {
 	public ConsultasDAO(EntityManager em) {
 		this.em = em;
 	}
+	
+	private void getTicketMedio {
+		
+		
+	}
+	
 }

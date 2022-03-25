@@ -10,6 +10,18 @@ public class ConsultasDAO {
 		this.em = em;
 	}
 	
+	@SuppressWarnings("unused")
+	private void getTicketMedio(int nr_telefone) {
+		Query query = (Query) em.createQuery(
+				"SELECT AVG(VL_CONSUMIDO) as valor_gasto"
+				+ "ROM TB_ENJOY_VISITA vis"
+				+ "inner join tb_enjoy_consumidor con"
+				+ "on con.id_consumidor = vis.id_consumidor"
+				+ "where con.nr_telefone = 987654321");
+		((javax.persistence.Query) query).setParameter("tel", nr_telefone);
+		var result = ((javax.persistence.Query) query).getSingleResult();
+		System.out.println("Ticket médio: R$ " + result);
+	}
 
 	public void getFrequenciaVisitas(int numTelefone) {
 		Query query = (Query) em.createQuery(

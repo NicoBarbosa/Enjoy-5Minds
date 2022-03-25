@@ -1,5 +1,11 @@
 package br.com.fiap.enjoy.dao;
 
+import javax.persistence.EntityManager;
+
 public class ConsultasDAO {
-//BORA BORA BORA!!!!
+	private EntityManager em;
+	
+	public ConsultasDAO(EntityManager em) {
+		this.em = em;
+	}
 }

@@ -11,16 +11,16 @@ public class ConsultasDAO {
 	}
 	
 	@SuppressWarnings("unused")
-	private void getTicketMedio(int nr_telefone) {
+	private void getTicketMedio(int numTelefone) {
 		Query query = (Query) em.createQuery(
 				"SELECT AVG(VL_CONSUMIDO) as valor_gasto"
 				+ "ROM TB_ENJOY_VISITA vis"
 				+ "inner join tb_enjoy_consumidor con"
 				+ "on con.id_consumidor = vis.id_consumidor"
-				+ "where con.nr_telefone = 987654321");
-		((javax.persistence.Query) query).setParameter("tel", nr_telefone);
-		var result = ((javax.persistence.Query) query).getSingleResult();
-		System.out.println("Ticket médio: R$ " + result);
+				+ "where con.telefone = 987654321");
+		((javax.persistence.Query) query).setParameter("tel", numTelefone);
+		var resultado = ((javax.persistence.Query) query).getSingleResult();
+		System.out.println("Ticket médio: R$ " + resultado);
 	}
 
 	public void getFrequenciaVisitas(int numTelefone) {
@@ -30,10 +30,6 @@ public class ConsultasDAO {
 				);
 	}
 
-	private void getTicketMedio() {
-		
-		
-	}
 	
 	private void getBebidaConsumida(int numTelefone) {
 		
@@ -53,6 +49,22 @@ public class ConsultasDAO {
 		
 		var resultado1 = (Object[]) query.getSingleResult();		
 		System.out.println(resultado1);
+	}
+	
+	//ultima visita
+	private void getUltimaVisita(int numTelefone) {
+		Query query = (Query) em.createQuery(
+				"select max(vis.dt_visita)"
+				+ "from tb_enjoy_visita vis"
+				+ "inner join tb_enjoy_consumidor con"
+				+ "on con.id_consumidor = vis.id_consumidor"
+				+ "where con.telefone = 987654321");
+		
+		query.getMaxResults(1);
+		query.setParameter("telefonr", numTelefone);
+		var resultado = query.getSingleResult();
+		System.out.println(resultado);
+		
 	}
 	
 

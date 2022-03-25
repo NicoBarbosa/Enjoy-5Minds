@@ -10,6 +10,7 @@ public class ConsultasDAO {
 		this.em = em;
 	}
 	
+	
 	@SuppressWarnings("unused")
 	private void getTicketMedio(int nr_telefone) {
 		Query query = (Query) em.createQuery(

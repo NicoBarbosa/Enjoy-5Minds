@@ -14,8 +14,8 @@ public class ConsultasDAO {
 	private void getTicketMedio(int numTelefone) {
 		Query query = (Query) em.createQuery(
 				"SELECT AVG(VL_CONSUMIDO) as valor_gasto"
-				+ "ROM TB_ENJOY_VISITA vis"
-				+ "inner join tb_enjoy_consumidor con"
+				+ "ROM Visitas vis"
+				+ "inner join Consumidor con"
 				+ "on con.id_consumidor = vis.id_consumidor"
 				+ "where con.telefone = 987654321");
 		((javax.persistence.Query) query).setParameter("tel", numTelefone);
@@ -25,8 +25,8 @@ public class ConsultasDAO {
 
 	public void getFrequenciaVisitas(int numTelefone) {
 		Query query = (Query) em.createQuery(
-				"ROUND(COUNT(DISTINCT vis.dt_visita) / COUNT(DISTINCT TO_CHAR(vis.dt_visita, 'mm/YY')),0)\n"
-			  + "from tb_enjoy_visita vis JOIN tb_enjoy_consumidor con"
+				"ROUND(COUNT(DISTINCT vis.dataVisita) / COUNT(DISTINCT TO_CHAR(vis.dataVisita, 'mm/YY')),0)\n"
+			  + "from Visita vis JOIN Consumidor con"
 				);
 	}
 
@@ -51,17 +51,17 @@ public class ConsultasDAO {
 		System.out.println(resultado1);
 	}
 	
-	//ultima visita
+	@SuppressWarnings("unused")
 	private void getUltimaVisita(int numTelefone) {
 		Query query = (Query) em.createQuery(
-				"select max(vis.dt_visita)"
-				+ "from tb_enjoy_visita vis"
-				+ "inner join tb_enjoy_consumidor con"
+				"select max(vis.dataVisita)"
+				+ "from Visita vis"
+				+ "inner join Consumidor con"
 				+ "on con.id_consumidor = vis.id_consumidor"
 				+ "where con.telefone = 987654321");
 		
-		query.getMaxResults(1);
-		query.setParameter("telefonr", numTelefone);
+		query.setMaxResults(1);
+		query.setParameter("telefone", numTelefone);
 		var resultado = query.getSingleResult();
 		System.out.println(resultado);
 		

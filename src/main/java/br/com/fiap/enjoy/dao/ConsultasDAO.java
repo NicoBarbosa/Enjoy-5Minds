@@ -19,18 +19,21 @@ public class ConsultasDAO {
 				+ "on con.id_consumidor = vis.id_consumidor"
 				+ "where con.telefone = 987654321");
 		((javax.persistence.Query) query).setParameter("tel", numTelefone);
-		var resultado = ((javax.persistence.Query) query).getSingleResult();
-		System.out.println("Ticket m�dio: R$ " + resultado);
+		Object resultado = ((javax.persistence.Query) query).getSingleResult();
+		System.out.println("Ticket m�dio: R$ " + resultado);
 	}
 
-	public void getFrequenciaVisitas(int numTelefone) {
-		Query query = (Query) em.createQuery(
-				"ROUND(COUNT(DISTINCT vis.dataVisita) / COUNT(DISTINCT TO_CHAR(vis.dataVisita, 'mm/YY')),0)\n"
-			  + "from Visita vis JOIN Consumidor con"
-				);
+	@SuppressWarnings("unused")
+	private void getFrequenciaVisitas(int numTelefone) {
+		javax.persistence.Query query = em.createQuery(
+				"ROUND(COUNT(DISTINCT vis.dt_visita) / COUNT(DISTINCT TO_CHAR(vis.dt_visita, 'mm/YY')),0) "
+			  + "from tb_enjoy_visita vis INNER JOIN tb_enjoy_consumidor con "
+			  + "where con.nr_telefone = :telefone ");
+		query.setParameter("telefone", numTelefone);
+		Object resultado = query.getSingleResult();
+		System.out.println("Frequência: " + resultado + "por mês");
 	}
 
-	
 	private void getBebidaConsumida(int numTelefone) {
 		
 		Query query = (Query) em.createQuery("SELECT BEB.categoria AS categoria_bebida, SUM(COM.quantidade) AS quantidade_prod"
@@ -47,7 +50,7 @@ public class ConsultasDAO {
 		query.setMaxResults(1);
 		query.setParameter("tel", numTelefone);
 		
-		var resultado1 = (Object[]) query.getSingleResult();		
+		Object resultado1 = (Object[]) query.getSingleResult();		
 		System.out.println(resultado1);
 	}
 	
@@ -62,7 +65,7 @@ public class ConsultasDAO {
 		
 		query.setMaxResults(1);
 		query.setParameter("telefone", numTelefone);
-		var resultado = query.getSingleResult();
+		Object resultado = query.getSingleResult();
 		System.out.println(resultado);
 		
 	}
